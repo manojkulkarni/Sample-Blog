@@ -4,12 +4,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @user_type = params['user'].present? ? User.find(params['user'].to_i).id : 2
     @posts = Post.all
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @related_comments = Comment.where(post_id: params[:id])
   end
 
   # GET /posts/new

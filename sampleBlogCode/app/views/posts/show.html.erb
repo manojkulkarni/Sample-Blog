@@ -15,5 +15,19 @@
   <%= @post.desc %>
 </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<p>
+  <strong>Comments:</strong>
+  <% unless @related_comments.blank? %>
+    <% @related_comments.each do |comment| %>
+      <br/><%= comment.comment_desc %>
+    <% end %>
+  <% end %>
+</p>
+
+
+
+ <%= form_tag(comments_path, :method=>'post') do |f| %>
+   <%= text_area_tag :comment_desc %>
+   <%= hidden_field_tag :post_id, @post.id %>
+   <%= submit_tag 'Comment' %>
+ <% end %>
