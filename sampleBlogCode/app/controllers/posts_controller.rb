@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  
+  before_filter :is_post_present,  only: [:show, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -73,4 +75,12 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :prticle_type, :desc)
     end
+
+    def is_post_present
+      unless (Post.find(params[:id]) rescue false)
+        redirect_to posts_path
+      end
+    end
+
+
 end
