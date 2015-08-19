@@ -5,8 +5,8 @@ class CommentsController < ApplicationController
 			params[:comment] = { :comment_desc => params[:comment_desc], :post_id => params[:post_id]}
 			@comment = Comment.new(comment_params)
 		    @comment.save
-		    redirect_to post_path(params[:post_id])
 		end
+		redirect_to post_path(params[:post_id])
 	end
 
 
