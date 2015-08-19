@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <h1>Listing Posts</h1>
-
+<% is_editor = @user_type.eql?(1) %>
 <table>
   <thead>
     <tr>
@@ -18,14 +18,16 @@
         <td><%= post.prticle_type %></td>
         <td><%= post.desc %></td>
         <td><%= link_to 'Show', post %></td>
+        <% if is_editor %>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<% if @user_type.eql?(1) %>
+<% if is_editor %>
   <%= link_to 'New Post', new_post_path %>
 <% end %>
